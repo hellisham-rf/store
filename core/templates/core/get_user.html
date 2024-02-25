@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+
+<body>
+
+<table>
+<div>
+<tr>
+
+    <th>Product</th>
+    <th>Count</th>
+    <th>Price</th>
+</tr>
+<tr>
+ <td>
+    {% for p in product %}
+       {{ p }}*
+    {% endfor %}
+</td>
+<td>
+    {% for count in count %}
+        {{ count }}*
+    {% endfor %}
+</td>
+
+<td>
+    {% for price in price %}
+        {{ price }}*
+    {% endfor %}
+</td>
+
+</tr>
+</div>
+</table>
+
+</body>
+</html>

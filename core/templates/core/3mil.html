@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content-inner %}
+{% for obj in total %}
+    <P>order with id:{{ obj.id }}</P>
+    <P>user name:{{ obj.user}}</P>
+    <p>IN: {{ obj.createdate}}</p>
+    <p>Was Up To 3000000 IRR **</p>
+{% endfor %}
+{% endblock %}
+</body>
+</html>

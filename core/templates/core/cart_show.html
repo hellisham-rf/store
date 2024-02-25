@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<style>
+table, th, td {
+  border:1px solid black; !
+}
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block window-title %}List Of Product{% endblock %}</title>
+</head>
+{% block start-of-page %}
+    <h1>List Of Products</h1>
+{% endblock %}
+
+<body>
+{% block content-inner %}
+<table style="width:100%">
+
+            <tr>
+                <th>Name</th>
+                <th>Count</th>
+                <th>Price</th>
+                <th>Total Price</th>
+            </tr>
+            <tr>
+                {% for item in cart.items %}
+
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.count }}</td>
+                    <td>{{ item.price }}IRR</td>
+                    <td>{{ item.total_price }}IRR</td>
+
+            </tr>
+                {% endfor %}
+</table>
+Total: {% if request.session.cart %}
+                    {{ request.session.cart.total}} IRR
+                    {% else %}
+                    0 IRR
+                    {% endif %}
+    <div>
+    <a href="{% url 'store:checkout' %}" class="btn btn-primary">Check Out</a>
+    </div>
+{% endblock %}
+
+</body>
+</html>

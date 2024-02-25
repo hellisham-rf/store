@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Store Django Project Documentation &#8212; Store 1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=12dfc556" />
+    <script src="_static/documentation_options.js?v=29a6c3e3"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="store-django-project-documentation">
+<h1>Store Django Project Documentation<a class="headerlink" href="#store-django-project-documentation" title="Link to this heading">¶</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
+<p>This project is a simple online store application built with Django. It allows users to see the products, purchase products,see orders above 3 million and see all people’s orders by name. It also has features such as user authentication, shopping cart, checkout.</p>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
+<p>To install and run this project, you will need the following:</p>
+<ul class="simple">
+<li><p>Python 3.8 or later</p></li>
+<li><p>Django 5.0 or later</p></li>
+<li><p>A PostgreSQL database</p></li>
+</ul>
+<p>You can install the required Python packages using pip:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>You will also need to create a PostgreSQL database and a user with full access to it. You can use the following commands as an example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">-</span><span class="n">u</span> <span class="n">postgres</span> <span class="n">psql</span>
+<span class="n">CREATE</span> <span class="n">DATABASE</span> <span class="n">store</span><span class="p">;</span>
+<span class="n">ALTER</span> <span class="n">USER</span> <span class="n">postgres</span> <span class="n">PASSWORD</span> <span class="s1">&#39;1234&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>You will need to set the following environment variables with your database and Stripe credentials:</p>
+<p>To initialize the database tables and create a superuser, you can run the following commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">makemigrations</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">migrate</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">createsuperuser</span>
+</pre></div>
+</div>
+<p>To start the development server, you can run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">runserver</span>
+</pre></div>
+</div>
+<p>You can then access the application at <a class="reference external" href="http://localhost:8000">http://localhost:8000</a>.</p>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h2>
+<p>The application has two main parts: the public site and the admin site.</p>
+<section id="public-site">
+<h3>Public Site<a class="headerlink" href="#public-site" title="Link to this heading">¶</a></h3>
+<p>The public site is where users can see products, buy products, see orders above 3 million and see all people’s orders by name. It has the following pages:</p>
+<ul class="simple">
+<li><p><strong>/Store/list_product/</strong>: This page displays a list of featured products.</p></li>
+<li><p><strong>/store/cart/</strong>: The cart page shows the items that the user has added to their shopping cart, along with the total price and a checkout button.</p></li>
+<li><p><strong>/store/cart/add/&lt;int:id&gt;</strong>: Adds the selected product to the card based on ID.</p></li>
+<li><p><strong>/store/user/order/&lt;str:user&gt;</strong>: It shows all customer orders based on customer name.</p></li>
+<li><p><strong>/store/checkout</strong>: The checkout page allows the user to enter their shipping and billing information.</p></li>
+<li><p><strong>/store/three/mil/</strong>: The order page shows the details of the user’s order, such as the order number, date, status, items, and tracking number. It also allows the user to cancel or return their order, or contact the seller.</p></li>
+<li><p><strong>Account</strong>: The account page allows the user to view and edit their profile, change their password, and view their order history.</p></li>
+<li><p><strong>/account/login</strong>: The login page allows the user to log in to their account using their email and password.</p></li>
+<li><p><strong>/account/logout</strong>: The logout page logs the user out of their account and redirects them to the home page.</p></li>
+<li><p><strong>/account/signup</strong>: Users can create their new account using this page.</p></li>
+</ul>
+</section>
+<section id="admin-site">
+<h3>Admin Site<a class="headerlink" href="#admin-site" title="Link to this heading">¶</a></h3>
+<p>The admin site is where the site owner or staff can manage the products, categories, orders, users, and reviews. It can be accessed at <a class="reference external" href="http://localhost:8000/admin">http://localhost:8000/admin</a> using the superuser credentials. It has the following sections:</p>
+<ul class="simple">
+<li><p><strong>Products</strong>: The products section allows the admin to add, edit, or delete products, as well as upload image.</p></li>
+<li><p><strong>Categories</strong>: The categories section allows the admin to add, edit, or delete categories, as well as assign products to them.</p></li>
+<li><p><strong>Orders</strong>: The orders section allows the admin to view, edit, or delete orders.</p></li>
+<li><p><strong>Users</strong>: The users section allows the admin to view, edit, or delete users, as well as assign them to groups or permissions.</p></li>
+<li><p><strong>Customers</strong>: The customers section allows the admin to view, edit, or delete customers.</p></li>
+</ul>
+</section>
+<section id="deployment">
+<h3>Deployment<a class="headerlink" href="#deployment" title="Link to this heading">¶</a></h3>
+<p>In this part, we will deploy the project on a Linux server using NGINX and UWSGI.
+At first we need to install the required packages using the following codes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span> <span class="n">nginx</span><span class="o">-</span><span class="n">full</span>
+<span class="n">sudo</span> <span class="o">-</span><span class="n">H</span> <span class="n">pip3</span> <span class="n">install</span> <span class="n">virtualenv</span>
+<span class="n">sudo</span> <span class="o">-</span><span class="n">H</span> <span class="n">pip3</span> <span class="n">install</span> <span class="n">uwsgi</span>
+</pre></div>
+</div>
+<p>Then we need to open the project in virtualenv:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">virtualenv</span> <span class="o">-</span><span class="n">p</span> <span class="n">python3</span> <span class="n">store</span><span class="o">&lt;</span><span class="n">project</span> <span class="n">name</span><span class="o">&gt;</span>
+<span class="n">source</span> <span class="n">store</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+</pre></div>
+</div>
+<p>Now we need to install project dependencies:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">store</span><span class="o">/</span><span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>Now we need to set our domain as an allowed host for django so that we can use it so we need to go We need to go to the settings file in the store directory
+and add our domain.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vim</span> <span class="n">store</span><span class="o">/</span><span class="n">store</span><span class="o">/</span><span class="n">setting</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>Then we exit the virtualenv:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">deactivate</span>
+</pre></div>
+</div>
+<p>In the next step, we go to configure uwsgi as an application server.First, we need to create a file at
+the following address for uwsgi settings.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">uwsgi</span><span class="o">/</span><span class="n">sites</span>
+<span class="n">sudo</span> <span class="n">vim</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">uwsgi</span><span class="o">/</span><span class="n">sites</span><span class="o">/</span><span class="n">store</span><span class="o">.</span><span class="n">ini</span>
+</pre></div>
+</div>
+<p>store.ini file settings:
+.. code-block:: ini</p>
+<blockquote>
+<div><p>[uwsgi]
+project = store
+uid = &lt;server-user&gt;
+base = /home/&lt;server-user&gt;</p>
+<p>chdir = %(base)/%(project)
+home = %(base)/store
+module= %(project).wsgi:application</p>
+<p>master = true
+processes = 2</p>
+<p>socket = /run/uwsgi/%(project).sock
+chown-socket %(uid):www-data
+chmod-socket = 660
+vacuum = true</p>
+</div></blockquote>
+<p>In the next step, we need to turn the uwsgi into a service:</p>
+<blockquote>
+<div><p>sudo vim /etc/systemd/system/uwsgi.service</p>
+</div></blockquote>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">uWSGI Service</span>
+
+<span class="k">[Service]</span>
+<span class="na">ExecStartPre</span><span class="o">=</span><span class="s">/bin/bash -c &#39;mkdir -p /run/uwsgi</span><span class="c1">; chown ubuntu:www-data&#39;</span>
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/local/bin/uwsgi --emperor /etc/uwsgi/sites</span>
+<span class="na">Restart</span><span class="o">=</span><span class="s">always</span>
+<span class="na">KillSignal</span><span class="o">=</span><span class="s">SIGQUIT</span>
+<span class="na">Type</span><span class="o">=</span><span class="s">notify</span>
+<span class="na">NotifyAccess</span><span class="o">=</span><span class="s">all</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+</pre></div>
+</div>
+<p>Now we activate uwsgi service:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">systemctl</span> <span class="n">start</span> <span class="n">uwsgi</span><span class="o">.</span><span class="n">service</span>
+</pre></div>
+</div>
+<p>It’s time to configure Nginx To use Nginx, we need to create a virtual host. Virtual hosts allow us to manage several domains on one server:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">vim</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">sites</span><span class="o">/</span><span class="n">available</span><span class="o">/</span><span class="n">store</span><span class="o">.</span><span class="n">ir</span><span class="o">&lt;</span><span class="n">project</span> <span class="n">name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">server {</span>
+<span class="w">    </span><span class="na">listen 80;</span>
+<span class="w">    </span><span class="na">server_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">store.ir www.store.ir</span><span class="c1">;</span>
+<span class="w">    </span><span class="na">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">/favicon.ico { access_log off</span><span class="c1">; log_not_found off; }</span>
+<span class="w">    </span><span class="na">location /media/ {</span>
+<span class="w">            </span><span class="na">root    /var/www/store/;</span>
+<span class="w">    </span><span class="na">}</span>
+<span class="w">    </span><span class="na">location /static/ {</span>
+<span class="w">            </span><span class="na">root    /var/www/store/;</span>
+<span class="w">    </span><span class="na">}</span>
+<span class="w">    </span><span class="na">location / {</span>
+<span class="w">    </span><span class="na">include uwsgi_params;</span>
+<span class="w">    </span><span class="na">uwsgi_pass unix</span><span class="o">:</span><span class="s">/run/uwsgi/store.sock</span><span class="c1">;</span>
+<span class="na">}</span>
+</pre></div>
+</div>
+<p>At last we need to make a symbolic link from available directory to sites-enabled:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">sites</span><span class="o">/</span><span class="n">available</span><span class="o">/</span><span class="n">store</span><span class="o">.</span><span class="n">ir</span><span class="o">&lt;</span><span class="n">project</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">nginx</span><span class="o">/</span><span class="n">sites</span><span class="o">/</span><span class="n">sites</span><span class="o">-</span><span class="n">enabled</span>
+</pre></div>
+</div>
+<p>To use static files and media, we first create the following directories:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">mkdir</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">store</span><span class="o">/</span>
+<span class="n">sudo</span> <span class="n">mkdir</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">store</span><span class="o">/</span><span class="n">static</span>
+<span class="n">sudo</span> <span class="n">mkdir</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span><span class="n">store</span><span class="o">/</span><span class="n">media</span>
+<span class="n">sudo</span> <span class="n">chown</span> <span class="o">-</span><span class="n">R</span> <span class="n">ubuntu</span><span class="p">:</span><span class="n">www</span><span class="o">-</span><span class="n">data</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">www</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>Now we go back to the virtualenv to collect our statick files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">store</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+<span class="n">python</span> <span class="n">manage</span><span class="o">.</span><span class="n">py</span> <span class="n">collectstatic</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">Store</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Ashkan Majidipour.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.2.6</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

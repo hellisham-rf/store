@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Log In</title>
+</head>
+<body>
+{% block content-inner %}
+    <div>
+    <h1>Log In</h1>
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+            {{ form }}
+            <input type='submit'>
+    </form>
+    </div>
+{% endblock %}
+</body>
+</html>
